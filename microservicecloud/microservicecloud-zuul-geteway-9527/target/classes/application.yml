@@ -1,0 +1,28 @@
+server:
+  port: 9527
+  
+spring:
+  application:
+    name: microservicecloud-zuul-geteway
+      
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    hostname: myzuul.com    #配置本地端口对应的名称
+    instance-id: geteway-9527.com
+    prefer-ip-address: true
+info:
+  app.name: microservicecloud-zuul-geteway-9527
+  company.name: www.baidu.com
+  build.artifactId: microservicecloud-zuul-geteway-9527
+  build.version: 0.0.1-SNAPSHOT
+  
+zuul:
+#  ignored-services: MICROSERVICECLOUD-DEPT #单个隐藏
+  ignored-services: "*"   #不暴露微服务名称
+  prefix: /coffee         #访问公共前缀
+  routes:
+    mydept.serviceId: MICROSERVICECLOUD-DEPT
+    mydept.path: /mydept/**  #访问微服务接口用mydept代替
